@@ -1,6 +1,9 @@
 #  create to get Dynamic IP
+#add time + ip  written in txt
 import socket
 import os
+from time import sleep,ctime,strftime
+
 class GetIp(object):
 
     
@@ -39,12 +42,18 @@ class GetIp(object):
                 print(' open file failed in a mode')
             else:
                 print('file open successfully')
+                
+        try:
+            ip_log.write('%s <----> %s %s ' % (self.ip[2],strftime('%d-%m-%Y'),strftime('%H:%M:%S')))
+            ip_log.write('\n')
+            ip_log.close()
 
-        ip_log.writelines(self.ip[2])
-        ip_log.write('\n')
-        ip_log.close()
-
-        print('written')
+            
+        except:
+            print('written failed')
+        else:
+            print('written')
+            
 
         
 obj = GetIp('paksila.xicp.net')
