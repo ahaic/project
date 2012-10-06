@@ -3,60 +3,72 @@
 import socket
 import os
 from time import sleep,ctime,strftime
+import time
 
 class GetIp(object):
 
     
-    global path
-    path = '/Users/ahaic/Desktop/ip_log.txt'
+#    global path
+#    path = '/Users/ahaic/Desktop/ip_log.txt'
 
-    def __init__(self,url):
+    def __init__(self,url,path):
 
         self.url=url
         self.ip=''
+        self.path = path
         self.get_ip()
         self.record_ip()
+
+        
 
     def get_ip(self):
 
         self.ip=socket.gethostbyname_ex(self.url)
 
     def record_ip(self):
-        
-        
+        while True:
             
-        if os.path.isfile(path) !=True:
+        
+            if os.path.isfile(self.path) !=True:
 
-            print('file does not exists ')
-            try:
-                ip_log = open(path,'w')
+                print('file does not exists ')
+                try:
+                    ip_log = open(self.path,'w')
 
-            except IOError:
-                print('fucked')
+                except IOError:
+                    print('fucked')
                
-        else:
-            try:
-                
-                ip_log=open(path,'a')
-            except:
-                print(' open file failed in a mode')
             else:
-                print('file open successfully')
+                try:
+                    
+                    ip_log=open(self.path,'a')
+                except:
+                    print(' open file failed in a mode')
+                else:
+                    print('file open successfully')
+                    
+            try:
+                ip_log.write('%s <----> %s %s ' % (self.ip[2],strftime('%d-%m-%Y'),strftime('%H:%M:%S')))
+                ip_log.write('\n')
+                ip_log.close()
+    
                 
-        try:
-            ip_log.write('%s <----> %s %s ' % (self.ip[2],strftime('%d-%m-%Y'),strftime('%H:%M:%S')))
-            ip_log.write('\n')
-            ip_log.close()
+            except:
+                print('written failed')
+            else:
+                print('written')
 
-            
-        except:
-            print('written failed')
-        else:
-            print('written')
+            sleep(3600)
+    
+    def set_time(self):
+
+        pass        
+
+        
             
 
         
-obj = GetIp('paksila.xicp.net')
+obj = GetIp('paksila.xicp.net','/Users/ahaic/Desktop/ip_log.txt')
 
 
 print('ip address: ', obj.ip[2])
