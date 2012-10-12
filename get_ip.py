@@ -16,7 +16,7 @@ class GetIp(object):
         self.url=url
         self.ip=''
         self.path = path
-        self.get_ip()
+        
         self.record_ip()
 
         
@@ -27,6 +27,7 @@ class GetIp(object):
 
     def record_ip(self):
         while True:
+            self.get_ip()
             
         
             if os.path.isfile(self.path) !=True:
