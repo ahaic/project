@@ -23,7 +23,15 @@ class GetIp(object):
 
     def get_ip(self):
 
+        try:
+
         self.ip=socket.gethostbyname_ex(self.url)
+
+        except socket.error, e:
+
+            print('socket error: %s ' % e)
+            sleep(100)
+            self.get_ip()
 
     def record_ip(self):
         while True:
@@ -37,7 +45,7 @@ class GetIp(object):
                     ip_log = open(self.path,'w')
 
                 except IOError:
-                    print('fucked')
+                    print('IO Error ')
                
             else:
                 try:
@@ -57,7 +65,8 @@ class GetIp(object):
             except:
                 print('written failed')
             else:
-                print('written')
+                print('written  \n waiting for next writting')
+                
 
             sleep(3600)
     
