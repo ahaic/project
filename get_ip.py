@@ -27,7 +27,7 @@ class GetIp(object):
 
             self.ip=socket.gethostbyname_ex(self.url)
 
-        except socket.error, e:
+        except socket.error as e:
 
             print('socket error: %s ' % e)
             sleep(100)
