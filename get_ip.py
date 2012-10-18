@@ -46,6 +46,8 @@ class GetIp(object):
 
                 except IOError:
                     print('IO Error ')
+                    exit()
+                    
                
             else:
                 try:
@@ -78,7 +80,7 @@ class GetIp(object):
             
 
         
-obj = GetIp('paksila.xicp.net','/Users/ahaic/Desktop/ip_log.txt')
+obj = GetIp('paksila.xicp.net','/home/python/ip_log.txt')
 
 
 print('ip address: ', obj.ip[2])
