@@ -25,7 +25,7 @@ class GetIp(object):
 
         try:
 
-        self.ip=socket.gethostbyname_ex(self.url)
+            self.ip=socket.gethostbyname_ex(self.url)
 
         except socket.error, e:
 
