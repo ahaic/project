@@ -8,6 +8,8 @@ import time
 class GetIp(object):
 
     
+    
+    global TIME
 #    global path
 #    path = '/Users/ahaic/Desktop/ip_log.txt'
 
@@ -22,11 +24,14 @@ class GetIp(object):
         
 
     def get_ip(self):
+        global IP
 
         try:
 
-            self.ip=socket.gethostbyname_ex(self.url)
-
+            IP=str(socket.gethostbyname_ex(self.url)[2][0])
+            
+            print(IP)
+            
         except socket.error as e:
 
             print('socket error: %s ' % e)
@@ -41,6 +46,7 @@ class GetIp(object):
             if os.path.isfile(self.path) !=True:
 
                 print('file does not exists ')
+                
                 try:
                     ip_log = open(self.path,'w')
 
@@ -59,13 +65,16 @@ class GetIp(object):
                     print('file open successfully')
                     
             try:
-                ip_log.write('%s <----> %s %s ' % (self.ip[2],strftime('%d-%m-%Y'),strftime('%H:%M:%S')))
+                self.output()
+                ip_log.write('%s \n %s ' % (self.row1,self.row2))
                 ip_log.write('\n')
                 ip_log.close()
     
                 
-            except:
-                print('written failed')
+            except Exception as e:             # catch all exception
+                print('written failed :', e)
+                print('stop running')
+                break
             else:
                 print('written  \n waiting for next writting')
                 
@@ -74,7 +83,27 @@ class GetIp(object):
     
     def set_time(self):
 
-        pass        
+        pass
+    
+    
+        
+    def output(self):
+
+        li = 18 -len(IP)
+        ip="  "+IP+(li*" ")
+
+        time =   strftime('%d-%m-%Y')+ " " +strftime('%H:%M:%S')
+        lt = 18-len(time)
+        time="  "+time+(lt*" ")
+    
+        self.row1 =(22*'-')+'+'+(22*'-')
+    
+        self.row2='|'+ip+'|'+time+'|'
+
+ #       return self.row1
+        
+
+
 
         
             
@@ -82,8 +111,9 @@ class GetIp(object):
         
 obj = GetIp('paksila.xicp.net','/home/python/ip_log.txt')
 
+#obj = GetIp('paksila.xicp.net','/Users/ahaic/Desktop/ip_log.txt')
 
-print('ip address: ', obj.ip[2])
+print('ip address: ', IP)
         
     
     
