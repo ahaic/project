@@ -109,7 +109,7 @@ class GetIp(object):
             
 
         
-obj = GetIp('paksila.xicp.net','/home/python/ip_log.txt')
+obj = GetIp('paksila.xicp.net','/home/ip_log.txt')
 
 #obj = GetIp('paksila.xicp.net','/Users/ahaic/Desktop/ip_log.txt')
 
