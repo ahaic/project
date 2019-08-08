@@ -3,6 +3,10 @@
 # for the purpsoe of scanning all video names and making schedule
 # list filenames and video durations 
 # 缘由：学习时期，很多视频资料要看，为了做学习计划和学习进度表，因此写了程序分析视频时长, 方便安排学习进度
+#!/usr/bin/env python
+
+__author__      = "ahaic"
+
 
 import os,csv
 import sys,cv2
