@@ -1,5 +1,6 @@
 #coding:utf8
-#29 June 2019
+#version 1: 29 June 2019
+#version 2: 20 Sept. 2019   :support directory scan
 # for the purpsoe of scanning all video names and making schedule
 # list filenames and video durations 
 # 缘由：学习时期，很多视频资料要看，为了做学习计划和学习进度表，因此写了程序分析视频时长, 方便安排学习进度
@@ -27,19 +28,23 @@ def get_video_duration(filename):
 
 
 print('current dir:', os.getcwd())
-path=os.getcwd()
 
-f = dict()
-for (dirpath, dirnames, filenames) in os.walk(path):
-#    f.extend(filenames)
-    for i in filenames:
-        f[i]=get_video_duration(os.path.join(dirpath,i))
-#    print(f)
-    break
+path= os.getcwd()
 
+lsdir = sorted(os.listdir(path))
 
 with open('output.csv', 'w',newline='', encoding='utf-8-sig') as file:
     writer = csv.writer(file)
-    for (key,value) in f.items():
-        writer.writerow([key,value])
+
+    for directory in lsdir:
+        print(directory)
+        f = dict()
+        for (dirpath, dirnames, filenames) in os.walk(os.path.join(path,directory)):
+        #    f.extend(filenames)
+            for i in filenames:
+                f[i]=get_video_duration(os.path.join(dirpath,i))        
+
+            for (key,value) in f.items():
+                print(key,value)
+                writer.writerow([key,value])
     print('finish')
