@@ -37,14 +37,17 @@ with open('output.csv', 'w',newline='', encoding='utf-8-sig') as file:
     writer = csv.writer(file)
 
     for directory in lsdir:
-        print(directory)
+        #print(directory)
         f = dict()
+
+        f[directory]=''
         for (dirpath, dirnames, filenames) in os.walk(os.path.join(path,directory)):
         #    f.extend(filenames)
-            for i in filenames:
+            for i in sorted(filenames):
                 f[i]=get_video_duration(os.path.join(dirpath,i))        
 
             for (key,value) in f.items():
                 print(key,value)
                 writer.writerow([key,value])
     print('finish')
+
