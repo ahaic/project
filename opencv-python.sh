@@ -25,7 +25,7 @@ sudo apt-get install libjasper-dev -y
 sudo apt-get install libilmbase-dev libopenexr-dev libgstreamer1.0-dev -y  
 apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev -y  
 sudo apt-get install libqt4-test -y
-pip3 install opencv-python -y 
+yes | pip3 install opencv-python -y 
 
 
 
