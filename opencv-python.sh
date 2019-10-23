@@ -26,7 +26,7 @@ sudo apt-get install libilmbase-dev libopenexr-dev libgstreamer1.0-dev -y
 apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev -y  
 sudo apt-get install libqt4-test -y
 yes | pip3 install opencv-python -y 
-
+sudo apt-get install libqtgui4 -y
 
 
 echo 'Current status -------->> finished !'
