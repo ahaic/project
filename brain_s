@@ -249,24 +249,14 @@ def brains():
     show_data=()
     for i in range(n):
         next_review_date = data.loc[i].values[10]
-        remaining_days.append((today - next_review_date ).days)
+        remaining_days.append((next_review_date -today  ).days)
        # print(remaining_days.days)
-        data['days left'] = remaining_days
+    data['days left'] = remaining_days
+
+    dhtml=data[['Customer Name','Next Review Date','days left']]
+    return dhtml.to_html()
 
 
-        dhtml=data[['Customer Name','Next Review Date','days left']]
-        return dhtml.to_html()
-
-'''
-        if remaining_days.days >count:
-            #dhtml=data[['Customer Name','Next Review Date']]
-            #return dhtml.to_html()
-
-            data.loc[i].values[1]
-            #print (remaining_days.days)
-            #print('........')
-
-'''
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0',debug=True)
