@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang=en>
+   <head>
+
+     <script >
+
+     var $ = function(id) {
+     	return document.getElementById(id)
+     };
+     var device;
+     if (typeof window.orientation != 'undefined' || navigator.userAgent.indexOf('IEMobile') != -1) device = 'mobile';
+     else device = 'desktop';
+
+     function show(elm) {
+     	jQuery('#' + elm).show()
+     };
+
+     function hide(elm) {
+     	jQuery('#' + elm).hide()
+     };
+
+     function sc(elm) {
+     	jQuery('.' + elm).show()
+     };
+
+     function hc(elm) {
+     	jQuery('.' + elm).hide()
+     };
+
+     function vh(b, i) {
+     	var txt = jQuery(b).text();
+     	if (jQuery(i).css('display') == 'none') {
+     		jQuery(i).show();
+     		jQuery(b).text(txt.replace('View', 'Hide'));
+     		return
+     	};
+     	jQuery(i).hide();
+     	jQuery(b).text(txt.replace('Hide', 'View'))
+     };
+
+     function vh1(b, i) {
+     	var txt = jQuery(b).text();
+     	if (jQuery(i).css('display') == 'none') {
+     		jQuery(i).show();
+     		jQuery(b).text(txt.replace('\u25bc', '\u25b2'));
+     		return
+     	};
+     	jQuery(i).hide();
+     	jQuery(b).text(txt.replace('\u25b2', '\u25bc'))
+     };
+
+     function to(elm) {
+     	window.location = $(elm).value
+     };
+
+     function nu(el) {
+     	return Number($(el).value)
+     };
+
+     function htm(el) {
+     	return $(el).innerHTML
+     };
+
+     function st(x) {
+     	return x.toLocaleString('en-In', {
+     		minimumFractionDigits: 0,
+     		maximumFractionDigits: 0
+     	})
+     };
+
+     function ns(y) {
+     	$(y).value = ($(y).value * 1).toLocaleString('en-In', {
+     		minimumFractionDigits: 0,
+     		maximumFractionDigits: 0
+     	})
+     };
+
+     function ns2(y) {
+     	$(y).value = ($(y).value * 1).toLocaleString('en-In', {
+     		minimumFractionDigits: 2,
+     		maximumFractionDigits: 2
+     	})
+     };
+
+     function sn(el) {
+     	var x = $(el).value;
+     	return Number(x.replace(/,/g, ''))
+     };
+
+     function comma() {
+     	var isIE = /*@cc_on!@*/ false || !!document.documentMode,
+     		isEdge = !isIE && !!window.StyleMedia;
+     	if (isIE || isEdge) {} else {
+     		jQuery('.ip input').keyup(function(event) {
+     			if (event.which >= 37 && event.which <= 40) {
+     				event.preventDefault()
+     			}
+     			jQuery(this).val(function(index, value) {
+     				value = value.replace(/,/g, '');
+     				return numberWithCommas(value)
+     			})
+     		});
+
+     		function numberWithCommas(x) {
+     			var result = x.toString().split('.');
+     			var lastThree = result[0].substring(result[0].length - 3);
+     			var otherNumbers = result[0].substring(0, result[0].length - 3);
+     			if (otherNumbers != '') lastThree = ',' + lastThree;
+     			result[0] = otherNumbers.replace(/B(?=(d{2})+(?!d))/g, ',') + lastThree;
+     			return result.join('.')
+     		}
+     	}
+     };
+
+     function ipn() {
+     	jQuery('.ip input').each(function(event) {
+     		if (event.which >= 37 && event.which <= 40) {
+     			event.preventDefault()
+     		}
+     		jQuery(this).val(function(index, value) {
+     			value = value.replace(/,/g, '');
+     			if (isNaN(value)) value = value;
+     			else Number(value.replace(/,/g, ''));
+     			return value
+     		})
+     	})
+     };
+
+     function com() {
+     	jQuery('.ip input').each(function() {
+     		jQuery(this).val(function(index, value) {
+     			if (isNaN(value)) {
+     				return value
+     			} else {
+     				if (value != 0) {
+     					return Math.round(value).toLocaleString('en-IN')
+     				} else return ''
+     			}
+     		})
+     	});
+     	jQuery('.op input').each(function() {
+     		jQuery(this).val(function(index, value) {
+     			if (isNaN(value)) {
+     				return value
+     			} else {
+     				return Math.round(value).toLocaleString('en-IN')
+     			}
+     		})
+     	})
+     };
+
+     function com2() {
+     	jQuery('.ip input').each(function() {
+     		jQuery(this).val(function(index, value) {
+     			if (isNaN(value)) {
+     				return value
+     			} else {
+     				if (value != 0) {
+     					return (value * 1).toLocaleString('en-IN', {
+     						minimumFractionDigits: 2,
+     						maximumFractionDigits: 2
+     					})
+     				} else return ''
+     			}
+     		})
+     	});
+     	jQuery('.op input').each(function() {
+     		jQuery(this).val(function(index, value) {
+     			if (isNaN(value)) {
+     				return value
+     			} else {
+     				return (value * 1).toLocaleString('en-IN', {
+     					minimumFractionDigits: 2,
+     					maximumFractionDigits: 2
+     				})
+     			}
+     		})
+     	})
+     };
+
+     function resizeiframe(obj) {
+     	obj.style.height = obj.contentWindow.documentElement.scrollHeight * 1 + 5 * 1 + 'px'
+     };
+
+     function ay1() {
+     	var elm = $('ay').value;
+     	window.location = elm
+     }
+
+     </script>
+
+
+   </head>
+   <body>
+
+
+      <div id=bdy>
+
+
+         <form>
+            <table>
+               <col class=w30>
+               <col class=w70>
+               <tr>
+                  <td>Enter Currency name (default Dollar)
+                  <td><input id=cur value=Dollar>
+               <tr>
+                  <td>Enter Currency Fraction name (default Cent)
+                  <td><input id=frac value=Cent>
+               <tr>
+                  <td>Enter number to convert into above currency in Words
+                  <td><input id=amt value=0>
+               <tr>
+                  <td><button type=reset>Reset</button>
+                  <td><button type=button onclick='DollarCent(Math.round(100*$("amt").value)/100)'>Convert</button>
+               <tr>
+                  <td>Output in Words
+                  <td id=op>
+            </table>
+         </form>
+
+
+      </div>
+
+
+      <script>
+         function Dollar(e)
+         {var n=new Array;
+           n[0]="zero",n[1]="One",n[2]="Two",n[3]="Three",n[4]="Four",n[5]="Five",n[6]="Six",n[7]="Seven",n[8]="Eight",n[9]="Nine",n[10]="Ten",n[11]="Eleven",n[12]="Twelve",n[13]="Thirteen",n[14]="Fourteen",n[15]="Fifteen",n[16]="Sixteen",n[17]="Seventeen",n[18]="Eighteen",n[19]="Nineteen",n[20]="Twenty",n[30]="Thirty",n[40]="Forty",n[50]="Fifty",n[60]="Sixty",n[70]="Seventy",n[80]="Eighty",n[90]="Ninety",n[100]="One Hundred",n[200]="Two Hundred",n[300]="Three Hundred",n[400]="Four Hundred",n[500]="Five Hundred",n[600]="Six Hundred",n[700]="Seven Hundred",n[800]="Eight Hundred",n[900]="Nine Hundred";
+
+         var t=(e=e.toString()).split(".")[0].split(",").join(""),u=t.length,r="";if(u<=11)
+         {for(var o=new Array(0,0,0,0,0,0,0,0,0,0,0),l=new Array,i=0;i<u;i++)l[i]=t.substr(i,1);i=11-u;
+
+           for(
+             var a=0;
+             i<11;i++,a++)o[i]=l[a];for(i=0,a=1;i<11;i++,a++)0!=i&&3!=i&&6!=i&&9!=i||1==o[i]&&(o[a]=10+parseInt(o[a]),o[i]=0);value="";for(i=0;i<11;i++)value=0==i||3==i||6==i||9==i?10*o[i]:2==i||5==i||8==i?100*o[i]:o[i],0!=value&&(r+=n[value]+" "),1==i&&0!=value&&0<o[i-1]?r+="Billion ":1==i&&0!=value&&(r+="Biillion "),4==i&&0==value&&(0<o[i-1]||0<o[i-2])?r+="Million ":4==i&&0!=value&&(r+="Million "),7==i&&0==value&&(0<o[i-1]||0<o[i-2])?r+="Thousand ":7==i&&0!=value&&(r+="Thousand ");r=r.split(" ").join(" ")}return r}
+
+
+
+        function DollarCent(e){
+         var n=document.getElementById("cur").value,t=document.getElementById("frac").value;
+         nums=e.toString().split(".");
+         var u=Dollar(nums[0]);
+         if(null==nums[1]&&(nums[1]=0),
+         1==nums[1].length&&(nums[1]=nums[1]+"0"),
+         2<nums[1].length&&(nums[1]=nums[1].substring(2,length-1)),
+         2==nums.length){nums[0]<=12?nums[0]=10*nums[0]:nums[0]=nums[0];
+
+           var r=Dollar(nums[1]);""==u&&""==r&&(op="Zero only"),""==u&&""!=r&&(op=t+" "+r+" only"),""!=u&&""==r&&(op=n+" "+u+" only"),""!=u&&""!=r&&(op=n+" "+u+"and "+t+" "+r+" only"),
+
+           amt=document.getElementById("amt").value,99999999999.99<amt&&(op="Oops!!! The amount is too big to convert"),
+           1==isNaN(amt)&&(op="Error : Amount in number appears to be incorrect. Please Check."),document.getElementById("op").innerHTML=op}}
+
+         DollarCent(Math.round(100*document.getElementById("amt").value)/100)
+      </script>
